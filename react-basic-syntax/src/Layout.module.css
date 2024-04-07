@@ -1,0 +1,24 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bg-color);
+}
+
+.pageContainer {
+  flex: 0 0 500px;
+}
+
+.pageButtonContainer {
+  flex: 0 0 0;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pageButton {
+  flex: 0 0 3rem;
+  background-color: var(--secondary);
+}
