@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Page0 from "./page/0-class-reference";
-import Page1 from "./page/1-JSX-기초-reference";
+import Page1 from "./page/1-JSX-기초-student";
 import Page2 from "./page/2-JSX-map-reference";
 import Page3 from "./page/3-useState-reference";
 import Page4 from "./page/4-props-reference";
