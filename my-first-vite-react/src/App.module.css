@@ -1,0 +1,149 @@
+.wrapper {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+}
+
+.itemWrapper {
+  display: flex;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.itemHeaderItem {
+  display: inline-flex;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 0.5rem;
+  padding: 0.25rem;
+  width: 5rem;
+  flex: 1 0 auto;
+}
+
+.buttonWrapper {
+  flex: 0 0 3rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.buttonWrapper div {
+  flex: 0 0 1rem;
+  border: 0;
+}
+
+.inputWrapper {
+  padding-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-self: center;
+}
+
+.inputWrapperItem {
+  display: inline-flex;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 0.5rem;
+  padding: 0.25rem;
+  width: 5rem;
+  flex: 1 0 auto;
+}
+
+.inputWrapperInput {
+  border-radius: 4px;
+  height: 2rem;
+  margin: 0.5rem;
+  padding: 0.25rem;
+  width: 5rem;
+  flex: 1 0 auto;
+  background-color: var(--primary);
+}
+
+.buttonWrapper {
+  flex: 0 0 3rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.buttonWrapper button {
+  border: 0;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bg-color);
+}
+
+.pageContainer {
+  flex: 0 0 500px;
+}
+
+.pageButtonContainer {
+  flex: 0 0 0;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pageButton {
+  flex: 0 0 3rem;
+  background-color: var(--secondary);
+}
+
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-width: 540px;
+  border: 2px dashed var(--primary);
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+
+.message {
+  border: 1px solid var(--secondary);
+  padding: 0.5rem;
+}
+
+.form {
+  width: 100%;
+  padding: 1rem;
+}
+
+.fieldset {
+  max-width: calc(768px -2rem);
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bg-color);
+}
+
+.pageContainer {
+  flex: 0 0 500px;
+}
+
+.pageButtonContainer {
+  flex: 0 0 0;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pageButton {
+  flex: 0 0 3rem;
+  background-color: var(--secondary);
+}
