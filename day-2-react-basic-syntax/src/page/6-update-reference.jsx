@@ -9,16 +9,19 @@ export default function Page() {
     return f
   }));
   const handleQuantityChange = (e, i) => {
+    console.log('event', e);
     const newFruit = {
       ...fruits[i],
       quantity: e.target.value
     }
+    console.log('newFruit', newFruit)
     // const copy = fruits.slice();
     // copy.splice(i, 1, newFruit);
     // setFruits(copy);
 
     setFruits([...fruits.slice(0, i), newFruit, ...fruits.slice(i + 1)])
   }
+  console.log('fruits', fruits);
 
   return (
     <div className={s.appContainer}>
@@ -36,7 +39,7 @@ export default function Page() {
             type="number"
             defaultValue={f.quantity}
             // 익명 함수를 잘 활용하여 필요한 전달인자를 잘 전달해보자.
-            onChange={(e) => handleQuantityChange(e, i)}
+            onChange={function (e) { return handleQuantityChange(e, i) }}
             min={0}
             step={1}
         />

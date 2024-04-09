@@ -18,6 +18,9 @@ import { fruits } from "../sampleData.mjs";
  */
 function ChildComponent(props) {
   const { price } = props;
+  // props는 직접 수정하지 않는다. Read Only
+  // 매개변수를 직접 수정하지 마라 -> 순수 함수 원칙
+  // 자바스크립트 객체가 담긴 변수 -> 참조값, 레퍼런스 -> 함부로 수정하면 함수 밖에 작업에 영향을 줄 수 있다.
 
   return (
     <li>
@@ -27,6 +30,12 @@ function ChildComponent(props) {
     </li>
   );
 }
+
+// props는 매개변수다
+// props는 자바스크립트 객체다.
+// 리액트 컴포넌트: <Component name={name} /> 
+// Props: { name: "Hong Shik Kim" }
+// 
 
 // 컴포넌트에서 다른 React 컴포넌트를 불러와 렌더링하면 불러온 컴포넌트가 자식 컴포넌트
 // 같은 자식 컴포넌트를 여러개 렌더링하는 경우 key값을 지정해야 한다.

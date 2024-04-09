@@ -2,6 +2,11 @@ import { useState } from "react";
 import s from "./page.module.css";
 import { fruits as fruitsData } from "../sampleData.mjs";
 
+// 순수 함수니 뭐니..
+// 아쉽게도 프론트엔드 앱은 변경되는 데이터가 상당히 많습니다.
+// - 프론트엔드 개발은 사이드 이팩트 무조건 있다.
+//  - 네트워크 요청 => 미국 어디 서버로 요청 보냈어요. 이거 100% ok 응답 받을 것이라고 확신할 수 있나요?
+
 export default function Page() {
   // 페이지가 렌더링 된 후 변화해야 하는 값을 다루기 위해 useState를 씁니다. state hook이라고도 부름
 
