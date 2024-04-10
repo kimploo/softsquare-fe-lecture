@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch API</title>
+  <style>
+    /* Originally from Przemo Niewo's Codepen, REFERENCE: https://codepen.io/Fluskys/pen/poNWYry */
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #faca0c;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 40px;
+      color: whitesmoke;
+      text-align: center;
+    }
+
+    h5 {
+      font-weight: 100;
+      font-size: 20px;
+      color: black;
+      background-color: white;
+      text-align: center;
+      display: block;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .pokemon-card {
+      border: 4px solid white;
+      border-radius: 1rem;
+      width: 250px;
+      box-sizing: border-box;
+      text-align: center;
+      margin: 0.5rem;
+      background-color: #e0d494;
+      font-weight: 800;
+      color: #4f2424;
+    }
+
+    .abilities,
+    .types {
+      border: 2px solid white;
+      display: flex;
+      justify-content: center;
+      background-color: #f0eee6;
+      text-transform: capitalize;
+    }
+
+    .types {
+      border-bottom-right-radius: 10%;
+      border-bottom-left-radius: 10%;
+    }
+
+    .abilities-names,
+    .types-names {
+      flex: 1 0 0 ;
+      color: black;
+      font-display: block;
+      font-weight: 900;
+      font-size: 20px;
+      text-transform: uppercase;
+      justify-content: flex-start;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 1rem;
+    }
+    
+    ul {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding: 0;
+      flex: 1 0 0 ;
+    }
+    
+    li {
+      list-style-type: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Fetch API</h2>
+  <p>Fetch API는 Browser API 중 하나로, 서버와 쉽게 통신할 수 있게 마련된 API다.
+    window 객체에 포함되어 브라우저 내에서 쉽게 JavaScript로 서버와 요청을 주고받을 수 있다.</p>
+
+  <p>Fetch API는 두 번의 Promise로 구성된다. 첫 Promise는 서버의 요청을 기다리는 Promise,
+    두 번쨰 Promise는 서버의 요청을 JavaScript가 이해할 수 있게 객체 형태로 변환을 기다리는 Promise다.
+    두 Promise롤 온전히 잘 처리하면 비로소 원하는 작업을 시작할 수 있다.
+  </p>
+  
+  <pre>
+  <code>
+    fetch(`https://pokeapi.co/api/v2/pokemon/2`)
+      // 첫 번째 Promise
+        .then(response => response.json())
+      // 두 번째 Promise
+        .then((pokeCharacter) => {})
+  </code>
+  </pre>
+
+  <p>Fetch API는 작업을 JavaScript의 메인 쓰레드에 맡기지 않고 다음 작업을 진행한다. 즉, 비동기적인 특성이 있다.
+    이에 화면에 적용하는 시점에 해당 DOM이 아직 생성되지 않았다거나,
+    아직 제대로 응답을 처리하지 않은 상태에서 해당 데이터를 조회하려고 하다가 ReferenceError가 나기도 한다.
+    JavaScript 개발의 첫 걸림돌이기 때문에, Fetch API에 대해서 잘 알고 넘어가는 것이 좋겠다.
+  </p>
+
+  <main>
+    <!-- pokemon here -->
+  </main>
+
+  <script>
+    const getPokemon = async (id) => {
+      return fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+        .then(response => response.json())
+        .then((pokeCharacter) => {
+          return {
+            name: pokeCharacter.name,
+            sprite: pokeCharacter.sprites.other['official-artwork'].front_default,
+            types: pokeCharacter.types.map((data) => {
+              return {
+                type: data.type.name,
+                url: data.type.url
+              }
+            }),
+            abilities: pokeCharacter.abilities.map((data) => {
+              return {
+                name: data.ability.name,
+                url: data.ability.url
+              }
+            })
+          }
+        })
+        
+      // fetch 요청 했죠 -> 브라우저 API -> 패스
+      // pokeCharacter 조회 가능한 시점 vs A 호출 시점 (v)
+    }
+
+    const renderPokemon = (pokemon) => {
+      const main = document.querySelector('main')
+      const section = document.createElement('section')
+      main.append(section)
+      
+      const card = document.createElement('div')
+      card.classList.add('pokemon-card')
+      section.append(card)
+
+      const name = document.createElement('h5')
+      console.log(pokemon)
+      name.textContent = pokemon.name
+      const img = document.createElement('img')
+      img.src = pokemon.sprite      
+      img.alt = pokemon.name      
+      img.width = 100
+      
+      const abilities = document.createElement('div')
+      abilities.classList.add('abilities')
+      const abilityName = document.createElement('p')
+      abilityName.classList.add('abilities-names')
+      abilityName.textContent = 'Abilities'
+      
+      const abilityUl = document.createElement('ul')
+      const renderAbility = (ability) => {
+        const li = document.createElement('li')
+        li.textContent = ability.name
+        return li
+      } 
+      const abilityLis = pokemon.abilities.map(e => renderAbility(e)) 
+      abilityUl.append(...abilityLis)
+      abilities.append(abilityName, abilityUl)
+      
+      const types = document.createElement('div')
+      types.classList.add('types')
+      const typesNames = document.createElement('p')
+      typesNames.classList.add('types-names')
+      typesNames.textContent = 'Types'
+      
+      const typesUl = document.createElement('ul')
+      const renderType = (type) => {
+        const typesLi = document.createElement('li')
+        typesLi.textContent = type.type
+        return typesLi
+      } 
+      const typesLis = pokemon.types.map(e => renderType(e))
+
+      typesUl.append(...typesLis)
+      types.append(typesNames, typesUl) 
+      
+      card.append(name, img, abilities, types)
+    }
+
+    (async () => {
+      // await이 있을 때와 없을 때 어떤 에러가 나는지 직접 실행해보자
+      const IVYSAUR = await getPokemon(2)
+      const PIDGEY = await getPokemon(16)
+      renderPokemon(IVYSAUR)
+      renderPokemon(PIDGEY)
+    })()
+  </script>
+
+</body>
+
+</html>
