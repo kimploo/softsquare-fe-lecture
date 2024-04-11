@@ -1,0 +1,1 @@
+export const HOST =  import.meta.env.DEV ? `http://localhost:3000` : 'https://yipvpdxx1e.execute-api.ap-northeast-2.amazonaws.com';

@@ -1,0 +1,83 @@
+{
+  "fruits": [
+    {
+      "id": "1",
+      "name": "사과",
+      "price": 5000,
+      "quantity": 0
+    },
+    {
+      "id": "2",
+      "name": "바나나",
+      "price": 3000,
+      "quantity": 0
+    },
+    {
+      "id": "3",
+      "name": "체리",
+      "price": 12000,
+      "quantity": 4
+    },
+    {
+      "id": "5",
+      "name": "포도",
+      "price": 7000,
+      "quantity": 0
+    },
+    {
+      "id": "3440",
+      "name": "뉴과일",
+      "price": 6000,
+      "quantity": 3
+    }
+  ],
+  "todo": [
+    {
+      "id": "1",
+      "msg": "안녕하세",
+      "status": "IN_PROGRESS",
+      "createdAt": "2023-11-02T17:06:08.126Z",
+      "updatedAt": "2024-03-16T06:50:56.531Z",
+      "finishedAt": null
+    },
+    {
+      "id": "2",
+      "msg": "dddddddd",
+      "status": "IN_PROGRESS",
+      "createdAt": "2023-11-02T17:06:08.126Z",
+      "updatedAt": "2024-03-16T06:48:33.213Z",
+      "finishedAt": null
+    },
+    {
+      "id": "3",
+      "userId": 1,
+      "msg": "make",
+      "status": "IN_PROGRESS",
+      "createdAt": "2023-11-02T17:06:08.126Z",
+      "updatedAt": "2023-11-02T17:06:08.126Z",
+      "finishedAt": null
+    },
+    {
+      "id": "8921",
+      "msg": "asdfas",
+      "status": "IN_PROGRESS",
+      "createdAt": "2024-03-16T07:01:09.923Z",
+      "updatedAt": "2024-03-16T07:01:47.760Z",
+      "finishedAt": null
+    },
+    {
+      "id": "5f13",
+      "msg": "getasdfasdfasdf",
+      "status": "IN_PROGRESS",
+      "createdAt": "2024-04-11T23:18:41.351Z",
+      "updatedAt": "2024-04-11T23:19:50.028Z",
+      "finishedAt": null
+    }
+  ],
+  "user": [
+    {
+      "id": "1",
+      "name": "test-user"
+    }
+  ]
+}
