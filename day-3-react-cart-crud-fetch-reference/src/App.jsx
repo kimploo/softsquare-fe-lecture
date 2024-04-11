@@ -2,31 +2,25 @@ import s from "./App.module.css";
 import ItemHeader from "./components/ItemHeader";
 import ItemInput from "./components/ItemInput";
 import SumFooter from "./components/SumFooter";
-import { useState } from "react";
-import { data } from './data'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import getAllFruits from "./api/getAllFruits";
+import createOneFruit from "./api/createOneFruit";
+import updateOneFruit from "./api/updateOneFruit";
+import deleteOneFruit from "./api/deleteOneFruit";
 
 export default function App() {
-  const newId = Math.trunc(Math.random() * 9995) + 5
+  const newId = String(Math.trunc(Math.random() * 9995) + 5)
+  const [fruits, setFruits] = useState([]);
   const [isCreateMode, setCreateMode] = useState(false);
-  const [fruits, setFruits] = useState(data.fruits);
   const sum = fruits.reduce((a, b) => a + (b.price * b.quantity), 0)
   
   useEffect(() => {
-    const urlString = 'http://localhost:3000/fruits';
-    fetch(urlString)
-    .then((res) => {
-      const json = res.json()
-      return json
-    }).then(json => {
-      console.log(json)
-    })
+    getAllFruits()
+    .then(fruits => setFruits(fruits))
   }, [])
   
   const handleNewFruit = (e) => {
-    // 브라우저 기본 동작이 있습니다.
-    // 새로운 과일을 등록했습니다. -> (조선컴) -> 무조건 새로운 페이지를 불어와야 합니다.
-    e.preventDefault(); // 브라우저가 기본적으로 새로고침하는 기본동작을 prevent 한다 preventDefault
+    e.preventDefault();
     const formData = new FormData(e.currentTarget)
     const _name = formData.get(`nameInput_${newId}`)
     const _price = formData.get(`priceInput_${newId}`)
@@ -37,44 +31,41 @@ export default function App() {
       price: Number(_price),
       quantity: Number(_quantity)
     }
-    setFruits([...fruits, newFruit]);
+    console.log('handleNewFruit', newFruit)
+    createOneFruit(newFruit)
+    .then(() => {
+      getAllFruits()
+      .then(fruits => setFruits(fruits))
+    })
     setCreateMode(false);
   }
 
   const handleCreate = (newFruit) => {
     // 이전에 fruits를 전부 새로운 배열에 넣고, 새로운 과일을 전달한다.
-    setFruits([...fruits, newFruit]);
+    createOneFruit(newFruit)
+    .then(() => {
+      getAllFruits
+      .then(fruits => setFruits(fruits))
+    })
   }
 
   const handleEdit = (newFruit) => {
     const { id  } = newFruit
     const idx = fruits.findIndex((f) => f.id === id);
     if (idx !== -1) { 
-    
-      // 이전에 fruits를 전부 새로운 배열에 넣고, 변경할 과일을 전달한다.
-      setFruits([...fruits.slice(0, idx), newFruit, ...fruits.slice(idx + 1)])
+      updateOneFruit({ id, newFruit })
+      .then(() => 
+        getAllFruits()
+        .then(fruits => setFruits(fruits))
+      )
     }
   };
   
-  const handleEditQuantity = (newFruit) => {
-    const idx = fruits.findIndex((f) => f.id === newFruit.id);
-    if (idx !== -1) {
-      // fruits 복사
-      const copy = fruits.slice();
-      
-      // copy에 newFruit을 끼워넣는다.
-      copy.splice(idx, 1, newFruit);
-      
-      // fruits 갱신 함수 호출
-      setFruits(copy);
-    }
-  };
-
   const handleDelete = (id) => {
-    const idx = fruits.findIndex((f) => f.id === id);
-    // 내가 지정한 idx와 일치하지 않는 과일만 남기고 필터링 해라
-    // 내가 지정한 idx를 삭제한다
-    setFruits(fruits.filter((f, i) => i !== idx))
+    deleteOneFruit(id)
+    .then(() => 
+    getAllFruits()
+    .then(fruits => setFruits(fruits)))
   };
 
   return (
@@ -90,7 +81,6 @@ export default function App() {
                 fruit={f}
                 handleCreate={handleCreate}
                 handleEdit={handleEdit}
-                handleEditQuantity={handleEditQuantity}
                 handleDelete={handleDelete}
                 isCreateMode={false}
               ></ItemInput>
@@ -104,7 +94,6 @@ export default function App() {
               }} 
               handleCreate={handleCreate}
               handleEdit={handleEdit}
-              handleEditQuantity={handleEditQuantity}
               handleDelete={handleDelete}
               setCreateMode={setCreateMode}
               isCreateMode={isCreateMode}

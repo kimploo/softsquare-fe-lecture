@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import s from "./page.module.css";
 const HOST = `http://localhost:3000`
 
+// 나중에는 API 별로 정리를 하는 것을 추천합니다.
 function getAllFruits() {
   const url = new URL(HOST)
   url.pathname = '/fruits';
+  // const urlString = 'http://localhost:3000/fruits';
   return fetch(url)
     .then(res => {
       if (res.ok) {
@@ -21,6 +23,7 @@ function deleteOneFruit(id) {
     method: 'DELETE',
     headers: {
       "Content-Type": "application/json",
+      // "Authorization": "bearer token"
     },
   })
   .then(res => {
@@ -60,7 +63,8 @@ export default function Page() {
   const handleDelete = (id) => {
     deleteOneFruit(id)
     .then(() => {
-      getAllFruits().then(res => setFruits(res.map((f, i) => ({...f, quantity: fruits[i].quantity}))))
+      getAllFruits()
+      .then(res => setFruits(res.map((f, i) => ({...f, quantity: fruits[i].quantity}))))
     })
   }; 
 

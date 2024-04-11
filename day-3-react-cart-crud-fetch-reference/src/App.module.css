@@ -1,0 +1,50 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bg-color);
+}
+
+.pageContainer {
+  flex: 0 0 500px;
+}
+
+.pageButtonContainer {
+  flex: 0 0 0;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pageButton {
+  flex: 0 0 3rem;
+  background-color: var(--secondary);
+}
+
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-width: 540px;
+  border: 2px dashed var(--primary);
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+
+.message {
+  border: 1px solid var(--secondary);
+  padding: 0.5rem;
+}
+
+.form {
+  width: 100%;
+  padding: 1rem;
+}
+
+.fieldset {
+  max-width: calc(768px -2rem);
+}

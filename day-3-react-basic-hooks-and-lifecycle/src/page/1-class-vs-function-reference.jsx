@@ -15,7 +15,6 @@ import s from './page.module.css'
  * 
  */
 
-
 class ClassComponent extends Component {
 
   /**
@@ -25,13 +24,14 @@ class ClassComponent extends Component {
    * (그 외 목적의 코드는 작성하지 않는게 Best)
    * 
    */
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    // this.eventHandler = this.eventHandler.bind(this)
   }
 
   /**
    * componentDidMount는 컴포넌트가 화면에 보여지고 나서 (mount) 호출되는 메서드다.
-   * 주로 네트워크 요청을 받아오고 나서 DOM 조작을 할 때 사용한다.
+   * 주로 네트워크 요청을 받아오고 DOM 조작을 할 때 사용한다. (렌더링이 네트워크 요청보다 더 오래 걸리는 경우)
    * (React가 렌더링을 다 마치지 않았는데 fetch를 한다면? 의도치 않은 문제가 생길 가능성이 높다.)
    */
   componentDidMount() {
@@ -42,8 +42,10 @@ class ClassComponent extends Component {
    * componentDidUpdate는 컴포넌트가 state나 props가 변경되어 다시 렌더링될 때 (re-render) 호출되는 메서드다.
    * 상태, props 변경 시 어떤 작업을 해야 하는 경우에 사용한다.
    * 
+   * prevProp, prevState 
+   * 
    */
-  componentDidUpdate() {
+  componentDidUpdate(prevProp, prevState) {
     if (this.props.count % 2 === 0) {
       console.log('when this.props.count is even')
     }
@@ -69,12 +71,12 @@ class ClassComponent extends Component {
 function FunctionComponent({ count }) {
   useEffect(() => {
     console.log('on mount')
-    return () => console.log('on unmount')
+    return () => console.log('on unmount');
   }, [])
   
   useEffect(() => {
     console.log('on mount and update')
-  }) 
+  }, [count]) 
   
   return <div>
     <span>{count}</span>
@@ -92,8 +94,8 @@ export default function LearnClassFunction() {
     </button>
     <button onClick={() => setCount(count + 1)}>up</button>
     {isOn ? <>
-      <ClassComponent count={count}></ClassComponent>
-    <FunctionComponent count={count}></FunctionComponent>
+      {/* <ClassComponent count={count}></ClassComponent> */}
+      <FunctionComponent count={count}></FunctionComponent>
     </> : null}
 
   </div>
