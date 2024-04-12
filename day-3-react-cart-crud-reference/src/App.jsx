@@ -4,12 +4,16 @@ import ItemInput from "./components/ItemInput";
 import SumFooter from "./components/SumFooter";
 import { useState } from "react";
 import { data } from './data'
+import { useMemo } from "react";
 
 export default function App() {
   const newId = Math.trunc(Math.random() * 9995) + 5
   const [isCreateMode, setCreateMode] = useState(false);
   const [fruits, setFruits] = useState(data.fruits);
-  const sum = fruits.reduce((a, b) => a + (b.price * b.quantity), 0)
+  // 과일의 가격과 수량을 계산해서 합을 구하는 것
+  const sum = useMemo(() => { 
+    return fruits.reduce((a, b) => a + (b.price * b.quantity), 0)
+  }, [fruits])
   
   const handleNewFruit = (e) => {
     // 브라우저 기본 동작이 있습니다.
@@ -72,6 +76,7 @@ export default function App() {
         <form onSubmit={handleNewFruit} className={s.form}>
           <div className={s.fieldset}>
             <h2>장바구니 애플리케이션</h2>
+            {/* <button onClick={() => setIsOn(!isOn)}>{isOn.toString()}</button> */}
             <ItemHeader></ItemHeader>
             {fruits.map((f) => (
               <ItemInput
