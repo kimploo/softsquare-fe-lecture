@@ -36,20 +36,6 @@ function RedBlue({ idx, isRed, children, handleChangeColor }) {
 }
 
 function App() {
-
-
-  return (
-  <main>
-    {
-      colors.map((e, i) => {
-        return <RedBlue key={i} idx={i} isRed={e.isRed} handleChangeColor={handleChangeColor}>{e.content}</RedBlue>
-      })
-      }
-  </main>
-  )
-}
-
-function Wrapper() {
   const [colors, setColor] = useState(arr)
   console.log('render App')
   
@@ -61,9 +47,15 @@ function Wrapper() {
     setColor([...colors.slice(0, idx), newColor, ...colors.slice(idx + 1)]) 
   }
   
-  return <App
-  handleChangeColor={handleChangeColor}
-  ></App>
+  return (
+  <main>
+    {
+      colors.map((e, i) => {
+        return <RedBlue key={i} idx={i} isRed={e.isRed} handleChangeColor={handleChangeColor}>{e.content}</RedBlue>
+      })
+      }
+  </main>
+  )
 }
 
-export default Wrapper
+export default App

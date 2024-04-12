@@ -4,24 +4,12 @@ import ItemInput from "./components/ItemInput";
 import SumFooter from "./components/SumFooter";
 import { useState } from "react";
 import { data } from './data'
-import { useEffect } from "react";
 
 export default function App() {
   const newId = Math.trunc(Math.random() * 9995) + 5
   const [isCreateMode, setCreateMode] = useState(false);
   const [fruits, setFruits] = useState(data.fruits);
   const sum = fruits.reduce((a, b) => a + (b.price * b.quantity), 0)
-  
-  useEffect(() => {
-    const urlString = 'http://localhost:3000/fruits';
-    fetch(urlString)
-    .then((res) => {
-      const json = res.json()
-      return json
-    }).then(json => {
-      console.log(json)
-    })
-  }, [])
   
   const handleNewFruit = (e) => {
     // 브라우저 기본 동작이 있습니다.
@@ -37,6 +25,7 @@ export default function App() {
       price: Number(_price),
       quantity: Number(_quantity)
     }
+    // 메모리에 있는 상태 변수를 직접 변경
     setFruits([...fruits, newFruit]);
     setCreateMode(false);
   }

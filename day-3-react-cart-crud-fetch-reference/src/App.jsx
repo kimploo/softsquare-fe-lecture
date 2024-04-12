@@ -14,6 +14,7 @@ export default function App() {
   const [isCreateMode, setCreateMode] = useState(false);
   const sum = fruits.reduce((a, b) => a + (b.price * b.quantity), 0)
   
+  // 차이점 1
   useEffect(() => {
     getAllFruits()
     .then(fruits => setFruits(fruits))
@@ -31,10 +32,12 @@ export default function App() {
       price: Number(_price),
       quantity: Number(_quantity)
     }
-    console.log('handleNewFruit', newFruit)
+    // 서버에 CREATE 요청을 보내고
     createOneFruit(newFruit)
     .then(() => {
+      // 요청이 성공했으면, 과일 목록 전체 받아온다.
       getAllFruits()
+      // 이것도 잘 받아워지면 과일 목록 전체 상태를 변한다
       .then(fruits => setFruits(fruits))
     })
     setCreateMode(false);

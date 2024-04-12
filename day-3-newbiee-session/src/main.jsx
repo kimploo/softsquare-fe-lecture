@@ -8,3 +8,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   // <App />,
   // {App()} -> 표준 X
 )
+
+// add()
+// <App />
+// <App></App>
