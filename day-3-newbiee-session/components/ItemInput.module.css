@@ -1,0 +1,36 @@
+.inputWrapper {
+  padding-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-self: center;
+}
+
+.inputWrapperItem {
+  display: inline-flex;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 0.5rem;
+  padding: 0.25rem;
+  width: 5rem;
+  flex: 1 0 auto;
+}
+
+.inputWrapperInput {
+  border-radius: 4px;
+  height: 2rem;
+  margin: 0.5rem;
+  padding: 0.25rem;
+  width: 5rem;
+  flex: 1 0 auto;
+  background-color: var(--primary);
+}
+
+.buttonWrapper {
+  flex: 0 0 3rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.buttonWrapper button {
+  border: 0;
+}

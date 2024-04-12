@@ -1,0 +1,29 @@
+.itemWrapper {
+  display: flex;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.itemHeaderItem {
+  display: inline-flex;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 0.5rem;
+  padding: 0.25rem;
+  width: 5rem;
+  flex: 1 0 auto;
+}
+
+.buttonWrapper {
+  flex: 0 0 3rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.buttonWrapper div {
+  flex: 0 0 1rem;
+  border: 0;
+}
